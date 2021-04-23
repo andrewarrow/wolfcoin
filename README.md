@@ -18,8 +18,10 @@ in that address. Just wasted ETH and you have to try again.
 
 Request too little and you've left a lot on the table.
 
+```
   Total Supply: 2,147,483,647
  Maturity Date: 2024-01-11 11:58 UTC,1704974280
+```
 
 On Maturity Date, the entire supply is now finally worth
 1000 ADA.
