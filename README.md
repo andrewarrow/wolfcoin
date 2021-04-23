@@ -9,7 +9,7 @@ So the contract is such that 1622027640 rejects all requests
 until that time. Then it's a first come, first served system.
 
 This encourages people to write bots or stay up late on event
-nights, but the whole idea is get every humans to really care
+nights, but the whole idea is to get every human to really care
 about these datetimes.
 
 You don't know the total amount available for each date.
