@@ -3,6 +3,7 @@ package main
 import (
 	"crypto"
 	"crypto/ed25519"
+	"encoding/hex"
 	"fmt"
 	"io/ioutil"
 	"math/rand"
@@ -57,18 +58,19 @@ func main() {
 		b := ed25519.Verify(v, message, sig)
 		fmt.Println(b)
 	} else if command == "tx" {
-		from := "347b89a033993042a863886d39d97f1c9daa82d2d0a8e3ad49a37571451fc269"
+		from := "6f792374feacb50224984839bb5a2fe9ef0cf5b3ae559adadf74bdd38a018386"
 		to := "347b89a033993042a863886d39d97f1c9daa82d2d0a8e3ad49a37571451fc268"
 		amount := int64(100000000) // micro-wolf
 		jsonString := network.CreateMessage(from, to, amount)
 		fmt.Println(jsonString)
 		opts := SignerOptsThing{}
-		_, s, _ := ed25519.GenerateKey(nil)
+		shhh := ""
+		data, _ := hex.DecodeString(shhh)
+		s := ed25519.PrivateKey(data)
 		sig, _ := s.Sign(nil, []byte(jsonString), opts)
 		sigString := strings.ToLower(fmt.Sprintf("%X", sig))
 		fmt.Println(sigString)
 		network.Validate(jsonString, sigString)
-		//data, _ := hex.DecodeString(from)
 	} else if command == "start" {
 		network.ReadInGenesis()
 		network.Start()
