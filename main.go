@@ -1,6 +1,8 @@
 package main
 
 import (
+	"crypto"
+	"crypto/ed25519"
 	"fmt"
 	"math/rand"
 	"os"
@@ -43,9 +45,24 @@ func main() {
 			}
 		}
 		fmt.Printf("%d %0.2f\n", total, millionaires)
+	} else if command == "practice" {
+		v, s, _ := ed25519.GenerateKey(nil)
+		opts := SignerOptsThing{}
+		message := []byte("hello")
+		sig, _ := s.Sign(nil, message, opts)
+		fmt.Println(sig)
+		b := ed25519.Verify(v, message, sig)
+		fmt.Println(b)
 	} else if command == "start" {
 		network.Start()
 	} else if command == "help" {
 		PrintHelp()
 	}
+}
+
+type SignerOptsThing struct {
+}
+
+func (s SignerOptsThing) HashFunc() crypto.Hash {
+	return 0
 }
