@@ -3,10 +3,12 @@ package main
 import (
 	"crypto"
 	"crypto/ed25519"
+	"encoding/json"
 	"fmt"
 	"math/rand"
 	"os"
 	"strconv"
+	"strings"
 	"time"
 	"wolfcoin/args"
 	"wolfcoin/network"
@@ -53,11 +55,37 @@ func main() {
 		fmt.Println(sig)
 		b := ed25519.Verify(v, message, sig)
 		fmt.Println(b)
+	} else if command == "tx" {
+		from := "wolf347b89a033993042a863886d39d97f1c9daa82d2d0a8e3ad49a37571451fc269"
+		to := "wolf347b89a033993042a863886d39d97f1c9daa82d2d0a8e3ad49a37571451fc268"
+		amount := int64(100000000) // micro-wolf
+		jsonString := CreateMessage(from, to, amount)
+		fmt.Println(jsonString)
+		_, s, _ := ed25519.GenerateKey(nil)
+		opts := SignerOptsThing{}
+		sig, _ := s.Sign(nil, []byte(jsonString), opts)
+		sigString := strings.ToLower(fmt.Sprintf("%X", sig))
+		fmt.Println(sigString)
 	} else if command == "start" {
 		network.Start()
 	} else if command == "help" {
 		PrintHelp()
 	}
+}
+
+func CreateMessage(from, to string, amount int64) string {
+	tx := TxMessage{}
+	tx.From = from
+	tx.To = to
+	tx.Amount = amount
+	s, _ := json.Marshal(tx)
+	return string(s)
+}
+
+type TxMessage struct {
+	From   string `json:"from"`
+	To     string `json:"to"`
+	Amount int64  `json:"amount"`
 }
 
 type SignerOptsThing struct {
