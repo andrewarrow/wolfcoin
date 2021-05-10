@@ -73,6 +73,7 @@ func main() {
 		data, _ := hex.DecodeString(v)
 		fmt.Println(data)
 	} else if command == "start" {
+		network.ReadInGenesis()
 		network.Start()
 	} else if command == "help" {
 		PrintHelp()
