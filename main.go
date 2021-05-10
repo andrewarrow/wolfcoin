@@ -3,8 +3,10 @@ package main
 import (
 	"crypto"
 	"crypto/ed25519"
+	"encoding/hex"
 	"encoding/json"
 	"fmt"
+	"io/ioutil"
 	"math/rand"
 	"os"
 	"strconv"
@@ -35,17 +37,18 @@ func main() {
 		//2,147,483,647
 		total, _ := strconv.ParseInt(argMap["total"], 10, 64)
 		millionaires := float64(total) / 1000000.0
-		m := map[string]int{}
+		vbuff := []string{}
+		sbuff := []string{}
 		for i := 0; i < int(millionaires); i++ {
-			addr := network.NewAddress()
-			fmt.Println(addr)
-			m[addr]++
+			v, s, _ := ed25519.GenerateKey(nil)
+			vhex := strings.ToLower(fmt.Sprintf("%X", v))
+			shex := strings.ToLower(fmt.Sprintf("%X", s))
+
+			vbuff = append(vbuff, vhex)
+			sbuff = append(sbuff, shex)
 		}
-		for k, v := range m {
-			if v > 1 {
-				fmt.Println(k)
-			}
-		}
+		ioutil.WriteFile("genesis.v", []byte(strings.Join(vbuff, "\n")), 0755)
+		ioutil.WriteFile("genesis.s", []byte(strings.Join(sbuff, "\n")), 0755)
 		fmt.Printf("%d %0.2f\n", total, millionaires)
 	} else if command == "practice" {
 		v, s, _ := ed25519.GenerateKey(nil)
@@ -66,6 +69,9 @@ func main() {
 		sig, _ := s.Sign(nil, []byte(jsonString), opts)
 		sigString := strings.ToLower(fmt.Sprintf("%X", sig))
 		fmt.Println(sigString)
+		v := from[4:]
+		data, _ := hex.DecodeString(v)
+		fmt.Println(data)
 	} else if command == "start" {
 		network.Start()
 	} else if command == "help" {
