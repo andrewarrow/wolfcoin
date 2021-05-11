@@ -4,6 +4,7 @@ import (
 	"crypto"
 	"crypto/ed25519"
 	"encoding/hex"
+	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"math/rand"
@@ -72,7 +73,11 @@ func main() {
 			s := ed25519.PrivateKey(data)
 			sig, _ := s.Sign(nil, []byte(jsonString), opts)
 			sigString := strings.ToLower(fmt.Sprintf("%X", sig))
-			network.Validate(jsonString, sigString)
+			thing := network.ValidatePayload{}
+			thing.JsonString = jsonString
+			thing.SigString = sigString
+			asBytes, _ := json.Marshal(thing)
+			network.DoPost("127.0.0.1:3001", "/validate", asBytes)
 			time.Sleep(time.Second)
 		}
 	} else if command == "tx" {

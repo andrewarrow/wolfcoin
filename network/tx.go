@@ -18,7 +18,7 @@ func CreateMessage(from, to string, amount int64) string {
 	s, _ := json.Marshal(tx)
 	return string(s)
 }
-func Validate(jsonString, sig string) {
+func Validate(jsonString, sig string) bool {
 	var tx TxMessage
 	json.Unmarshal([]byte(jsonString), &tx)
 	data, _ := hex.DecodeString(tx.From)
@@ -27,7 +27,7 @@ func Validate(jsonString, sig string) {
 	b := ed25519.Verify(v, []byte(jsonString), sigData)
 	if b == false {
 		fmt.Println("sig is not right")
-		return
+		return false
 	}
 	if books[tx.From] < tx.Amount {
 		//TODO
@@ -41,6 +41,8 @@ func Validate(jsonString, sig string) {
 	f, _ := os.OpenFile(files.Path+"/tx.log", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
 	f.WriteString(string(asBytes) + "\n")
 	f.Close()
+
+	return true
 }
 
 func SendToPeers(msg []byte) {
