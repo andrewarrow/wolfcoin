@@ -9,13 +9,9 @@ import (
 	"time"
 )
 
-func BaseUrl() string {
-	return "http://localhost:3000"
-}
-
-func DoPost(route string, payload []byte) string {
+func DoPost(ipAndPort, route string, payload []byte) string {
 	body := bytes.NewBuffer(payload)
-	urlString := fmt.Sprintf("%s%s", BaseUrl(), route)
+	urlString := fmt.Sprintf("http://%s%s", ipAndPort, route)
 	request, _ := http.NewRequest("POST", urlString, body)
 	request.Header.Set("Content-Type", "application/json")
 	client := &http.Client{Timeout: time.Second * 5}

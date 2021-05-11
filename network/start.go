@@ -8,8 +8,11 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+var nodeName string
+
 func Start(port string) {
 	fmt.Println("wolfcoin starting on port", port)
+	nodeName = "127.0.0.1:" + port
 
 	r := gin.Default()
 	r.POST("/tx", func(c *gin.Context) {

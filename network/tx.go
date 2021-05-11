@@ -9,8 +9,6 @@ import (
 	"time"
 )
 
-func Transfer() {
-}
 func CreateMessage(from, to string, amount int64) string {
 	tx := TxMessage{}
 	tx.From = from
@@ -45,7 +43,12 @@ func Validate(jsonString, sig string) {
 }
 
 func SendToPeers(msg []byte) {
-	DoPost("/tx", msg)
+	for _, ipAndPort := range IpsFromRecord() {
+		if ipAndPort == nodeName {
+			continue
+		}
+		DoPost(ipAndPort, "/tx", msg)
+	}
 }
 
 type TxMessage struct {
