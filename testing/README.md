@@ -19,6 +19,18 @@ nodeD is 2nd to notice the double spend.
 
 it records A2C ok, but rejects A2B.
 
+Summary:
 
+node C and D disagree on which tx caused A to go negative.
+
+In order to acheive consensus:
+
+As other nodes tally data on which tx happened first,
+a correct order is determined:
+
+17 nodes say A2B happened first.
+3 nodes say A2C happened first.
+
+A2B wins.
 
 
