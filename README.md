@@ -46,6 +46,8 @@ New people get to start with very little money and earn rewards on
 each moon event. With Cardano you won't earn rewards with a small
 amount of ADA.
 
+# Calendar
+
 You can read [this post](https://andrewarrow.substack.com/p/moving-a-cli-to-the-browser-with) on how to understand your new calendar. And if you get the WASM running
 try the letter `u` or `d` on keyboard to move up or down dates.
 
@@ -64,6 +66,8 @@ Got the Monday thru Friday blues? This shakes everything up. Like a wonderful re
 Want to work hard and really acheive something? Now you've got ~15 days! Go for it, run run run!
 
 Want to chill and take a cycle off? That's encouraged.
+
+# Why
 
 On the coinbase application for listing a new currency it asks that big question: why?
 
