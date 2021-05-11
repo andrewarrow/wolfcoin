@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"os"
 	"time"
+	"wolfcoin/files"
 )
 
 func CreateMessage(from, to string, amount int64) string {
@@ -37,7 +38,7 @@ func Validate(jsonString, sig string) {
 	tx.Ts = time.Now().UnixNano()
 	asBytes, _ := json.Marshal(tx)
 	go SendToPeers(asBytes)
-	f, _ := os.OpenFile("tx.log", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	f, _ := os.OpenFile(files.Path+"/tx.log", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
 	f.WriteString(string(asBytes) + "\n")
 	f.Close()
 }

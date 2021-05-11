@@ -31,6 +31,8 @@ func main() {
 		return
 	}
 	command := os.Args[1]
+	port := argMap["port"]
+	files.ReadyDir(port)
 
 	if command == "genesis" {
 		//30,000,000,000
@@ -46,9 +48,8 @@ func main() {
 			vbuff = append(vbuff, vhex)
 			sbuff = append(sbuff, shex)
 		}
-		home := files.UserHomeDir()
-		ioutil.WriteFile(home+"/genesis.v", []byte(strings.Join(vbuff, "\n")), 0755)
-		ioutil.WriteFile(home+"/genesis.s", []byte(strings.Join(sbuff, "\n")), 0755)
+		ioutil.WriteFile(files.Path+"/genesis.v", []byte(strings.Join(vbuff, "\n")), 0755)
+		ioutil.WriteFile(files.Path+"/genesis.s", []byte(strings.Join(sbuff, "\n")), 0755)
 		fmt.Printf("%d %0.2f\n", total, millionaires)
 	} else if command == "practice" {
 		v, s, _ := ed25519.GenerateKey(nil)
@@ -89,8 +90,9 @@ func main() {
 		fmt.Println(sigString)
 		network.Validate(jsonString, sigString)
 	} else if command == "start" {
+		port := argMap["port"]
 		network.ReadInGenesis()
-		network.Start(argMap["port"])
+		network.Start(port)
 	} else if command == "help" {
 		PrintHelp()
 	}
