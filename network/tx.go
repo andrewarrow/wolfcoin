@@ -40,9 +40,14 @@ func Validate(jsonString, sig string) {
 
 	tx.Ts = time.Now().UnixNano()
 	asBytes, _ := json.Marshal(tx)
+	go SendToPeers(asBytes)
 	f, _ := os.OpenFile("tx.log", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
 	f.WriteString(string(asBytes) + "\n")
 	f.Close()
+}
+
+func SendToPeers(msg []byte) {
+	DoPost("/tx", msg)
 }
 
 type TxMessage struct {
