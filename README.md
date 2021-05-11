@@ -18,13 +18,9 @@ But something about waiting for these 5 day epochs with Cardano got me thinking 
 can see live in a modern browser at: [wolfschedule.com](https://wolfschedule.com/) 
 
 If you get some message about WASM it means your browser isn't modern. Try firefox. 
-
 But with the Cardano system, you get your rewards every 5 days. And there is this
-big countdown to the each of each 5 day period. I remember many times being
-excited about the epoch ending tomorrow. It becomes like pay day.
-
-There is an event just as important as sunrise and sunset in our lives, think
-of it as moonrise, moonset, and they happen about every 15 days. 
+big countdown to each of the 5 day periods. I remember many times being
+excited about the epoch ending tomorrow or in a few hours. It becomes like pay day.
 
 This code is an adventure into making a genesis file with 30,000 `ed25519` 
 public keys, and another file with those same private keys, and giving each
@@ -52,5 +48,11 @@ amount of ADA.
 
 You can read [this post](https://andrewarrow.substack.com/p/moving-a-cli-to-the-browser-with) on how to understand your new calendar. And if you get the WASM running
 try the letter `u` or `d` on keyboard to move up or down dates.
+
+There is an event just as important as sunrise and sunset in our lives, think
+of it as moonrise, moonset, and they happen about every 15 days. What could
+be better? You're getting a huge windfall of newly minted wolfcoins at these
+piviotal moments.
+
 
 
