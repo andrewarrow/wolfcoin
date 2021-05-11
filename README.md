@@ -54,5 +54,19 @@ of it as moonrise, moonset, and they happen about every 15 days. What could
 be better? You're getting a huge windfall of newly minted wolfcoins at these
 piviotal moments.
 
+If you are skeptical, all I can say is A-B test it. It can help with many things like:
 
+Having trouble picking a date in the future and commiting to something? Now you have
+very solid anchor dates available.
+
+Got the Monday thru Friday blues? This shakes everything up. Like a wonderful reset. Sone you'll find yourself doing some activity in the middle of the day on a Tuesday and before you'd be stuck in that i-must-be-working-and-productive-zombie-zone.
+
+Want to work hard and really acheive something? Now you've got ~15 days! Go for it, run run run!
+
+Want to chill and take a cycle off? That's encouraged.
+
+On the coinbase application for listing a new currency it asks that big question: why?
+
+I want a simpler golang codebase than Algorand, I want the Cardano staking model, I want true decentralization by encouring anyone with enough money to rent just 1 server to particpate in the proof of stake CPU network, and I want people to break free from
+a calendar that's not helping us.
 
