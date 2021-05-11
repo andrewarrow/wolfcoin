@@ -12,13 +12,14 @@ import (
 var books map[string]int64 = map[string]int64{}
 
 func ReadInGenesis() {
-	b, _ := ioutil.ReadFile("genesis.v")
+	home := files.UserHomeDir()
+	b, _ := ioutil.ReadFile(home + "/genesis.v")
 	for i, line := range strings.Split(string(b), "\n") {
 		books[line] = 1000000 * 1000000
 		fmt.Println(i, len(line))
 	}
 	fmt.Println(len(books))
-	b, _ = ioutil.ReadFile("tx.log")
+	b, _ = ioutil.ReadFile(home + "/tx.log")
 	for _, line := range strings.Split(string(b), "\n") {
 		if len(line) == 0 {
 			break

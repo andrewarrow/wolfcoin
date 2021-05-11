@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
+	"time"
 )
 
 func Transfer() {
@@ -36,8 +37,10 @@ func Validate(jsonString, sig string) {
 	books[tx.From] -= tx.Amount
 	books[tx.To] += tx.Amount
 
+	tx.Ts = time.Now().Unix()
+	asBytes, _ := json.Marshal(tx)
 	f, _ := os.OpenFile("tx.log", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
-	f.WriteString(jsonString + "\n")
+	f.WriteString(string(asBytes) + "\n")
 	f.Close()
 }
 
@@ -45,4 +48,5 @@ type TxMessage struct {
 	From   string `json:"from"`
 	To     string `json:"to"`
 	Amount int64  `json:"amount"`
+	Ts     int64  `json:"ts"`
 }
