@@ -6,12 +6,9 @@ and with the [Cardano](https://cardano.org/) style of staking.
 
 We encourage you to rent a server on 
 [do](https://m.do.co/c/560b7001e430) or [vultr](https://www.vultr.com/?ref=8507322)
-and sell us your CPU cycles and your good name.
+and sell us your CPU cycles and your good name. If you read my [how to bank in the modern era](https://andrewarrow.substack.com/p/in-order-to-bank-in-the-modern-era) post you'll see I come from the background of a former ADA Cardano stake pool operator.
 
-If you read my [how to bank in the modern era](https://andrewarrow.substack.com/p/in-order-to-bank-in-the-modern-era) post you'll see I come from the background of
-a former ADA Cardano stake pool operator.
-
-[!image](https://drive.google.com/file/d/1sdpfoXj2r0T32FYTS5OWZxFccZqXGKec/view)
+![image](https://drive.google.com/file/d/1sdpfoXj2r0T32FYTS5OWZxFccZqXGKec/view)
 
 I got a bunch of commits in this [other wolf project](https://github.com/andrewarrow/wolfservers/commits/main) and was using it to run 3 different pools, each with a relay. Ifinally realized at those numbers, I was better off just get 6% from Algorand via coinbase.
 
