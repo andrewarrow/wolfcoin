@@ -57,10 +57,26 @@ func main() {
 		fmt.Println(sig)
 		b := ed25519.Verify(v, message, sig)
 		fmt.Println(b)
+	} else if command == "loop" {
+		network.ReadInGenesis()
+		for {
+			from, fromS := network.Random()
+			to, _ := network.Random()
+			amount := int64(rand.Intn(999999) * 1000000) // micro-wolf
+			jsonString := network.CreateMessage(from, to, amount)
+			fmt.Println(jsonString)
+			opts := SignerOptsThing{}
+			data, _ := hex.DecodeString(fromS)
+			s := ed25519.PrivateKey(data)
+			sig, _ := s.Sign(nil, []byte(jsonString), opts)
+			sigString := strings.ToLower(fmt.Sprintf("%X", sig))
+			network.Validate(jsonString, sigString)
+			time.Sleep(time.Second)
+		}
 	} else if command == "tx" {
-		from := "6f792374feacb50224984839bb5a2fe9ef0cf5b3ae559adadf74bdd38a018386"
+		from := "cf90d4930c68918d6f73b6fa0d3780f6baed4cb0bbc4106ac93e54a963997707"
 		to := "347b89a033993042a863886d39d97f1c9daa82d2d0a8e3ad49a37571451fc268"
-		amount := int64(100000000) // micro-wolf
+		amount := int64(100 * 1000000) // micro-wolf
 		jsonString := network.CreateMessage(from, to, amount)
 		fmt.Println(jsonString)
 		opts := SignerOptsThing{}

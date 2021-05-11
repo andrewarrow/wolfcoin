@@ -29,6 +29,10 @@ func Validate(jsonString, sig string) {
 		fmt.Println("sig is not right")
 		return
 	}
+	if books[tx.From] < tx.Amount {
+		fmt.Println("missing", tx.Amount-books[tx.From])
+		return
+	}
 	books[tx.From] -= tx.Amount
 	books[tx.To] += tx.Amount
 

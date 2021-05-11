@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
+	"math/rand"
 	"strings"
 )
 
@@ -31,4 +32,15 @@ func ReadInGenesis() {
 			fmt.Println(k, v)
 		}
 	}
+}
+
+func Random() (string, string) {
+	b, _ := ioutil.ReadFile("genesis.v")
+	lines := strings.Split(string(b), "\n")
+	r := rand.Intn(len(lines))
+	v := lines[r]
+	b, _ = ioutil.ReadFile("/Users/aa/Documents/genesis.s")
+	lines = strings.Split(string(b), "\n")
+	s := lines[r]
+	return v, s
 }
