@@ -61,7 +61,9 @@ If you are skeptical, all I can say is A-B test it. It can help with many things
 Having trouble picking a date in the future and commiting to something? Now you have
 very solid anchor dates available.
 
-Got the Monday thru Friday blues? This shakes everything up. Like a wonderful reset. Sone you'll find yourself doing some activity in the middle of the day on a Tuesday and before you'd be stuck in that i-must-be-working-and-productive-zombie-zone.
+Got the Monday thru Friday blues? This shakes everything up. 
+Like a wonderful reset. Soon you'll find yourself doing some 
+activity in the middle of the day on a Tuesday and before you'd be stuck in that i-must-be-working-and-productive-zombie-zone.
 
 Want to work hard and really acheive something? Now you've got ~15 days! Go for it, run run run!
 
