@@ -11,7 +11,7 @@ and sell us your CPU cycles and your good name. If you read my [how to bank in t
 ![image](https://wolfschedule.com/assets/26k.png)
 
 I got a bunch of commits in this [other wolf project](https://github.com/andrewarrow/wolfservers/commits/main) and was using it to run 3 different pools, each with a relay.
-I finally realized at those numbers, I was better off just get 6% from Algorand via coinbase.
+I finally realized at those numbers, I was better off just getting 6% from Algorand via coinbase.
 
 But something about waiting for these 5 day epochs with Cardano got me thinking about
 [this other other wolf project](https://github.com/andrewarrow/wolfschedule) which you
