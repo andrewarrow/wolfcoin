@@ -6,6 +6,7 @@ import (
 	"io/ioutil"
 	"math/rand"
 	"strings"
+	"wolfcoin/files"
 )
 
 var books map[string]int64 = map[string]int64{}
@@ -35,11 +36,12 @@ func ReadInGenesis() {
 }
 
 func Random() (string, string) {
-	b, _ := ioutil.ReadFile("genesis.v")
+	home := files.UserHomeDir()
+	b, _ := ioutil.ReadFile(home + "/genesis.v")
 	lines := strings.Split(string(b), "\n")
 	r := rand.Intn(len(lines))
 	v := lines[r]
-	b, _ = ioutil.ReadFile("/Users/aa/Documents/genesis.s")
+	b, _ = ioutil.ReadFile(home + "/genesis.s")
 	lines = strings.Split(string(b), "\n")
 	s := lines[r]
 	return v, s

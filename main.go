@@ -8,23 +8,24 @@ import (
 	"io/ioutil"
 	"math/rand"
 	"os"
-	"strconv"
 	"strings"
 	"time"
 	"wolfcoin/args"
+	"wolfcoin/files"
 	"wolfcoin/network"
 )
 
 func PrintHelp() {
 	fmt.Println("")
 	fmt.Println("  wolfcoin help         # this menu")
-	fmt.Println("  wolfcoin supply       # ")
+	fmt.Println("  wolfcoin genesis      # ")
 	fmt.Println("")
 }
 
 func main() {
 	rand.Seed(time.Now().UnixNano())
 	argMap := args.ToMap()
+	fmt.Println(len(argMap))
 
 	if len(os.Args) == 1 {
 		PrintHelp()
@@ -32,9 +33,9 @@ func main() {
 	}
 	command := os.Args[1]
 
-	if command == "supply" {
-		//2,147,483,647
-		total, _ := strconv.ParseInt(argMap["total"], 10, 64)
+	if command == "genesis" {
+		//30,000,000,000
+		total := 30000000000
 		millionaires := float64(total) / 1000000.0
 		vbuff := []string{}
 		sbuff := []string{}
@@ -46,8 +47,9 @@ func main() {
 			vbuff = append(vbuff, vhex)
 			sbuff = append(sbuff, shex)
 		}
-		ioutil.WriteFile("genesis.v", []byte(strings.Join(vbuff, "\n")), 0755)
-		ioutil.WriteFile("genesis.s", []byte(strings.Join(sbuff, "\n")), 0755)
+		home := files.UserHomeDir()
+		ioutil.WriteFile(home+"/genesis.v", []byte(strings.Join(vbuff, "\n")), 0755)
+		ioutil.WriteFile(home+"/genesis.s", []byte(strings.Join(sbuff, "\n")), 0755)
 		fmt.Printf("%d %0.2f\n", total, millionaires)
 	} else if command == "practice" {
 		v, s, _ := ed25519.GenerateKey(nil)
