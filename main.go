@@ -25,7 +25,6 @@ func PrintHelp() {
 func main() {
 	rand.Seed(time.Now().UnixNano())
 	argMap := args.ToMap()
-	fmt.Println(len(argMap))
 
 	if len(os.Args) == 1 {
 		PrintHelp()
@@ -91,7 +90,7 @@ func main() {
 		network.Validate(jsonString, sigString)
 	} else if command == "start" {
 		network.ReadInGenesis()
-		network.Start()
+		network.Start(argMap["port"])
 	} else if command == "help" {
 		PrintHelp()
 	}

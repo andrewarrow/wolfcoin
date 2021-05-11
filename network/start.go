@@ -8,8 +8,8 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func Start() {
-	fmt.Println("wolfcoin starting...")
+func Start(port string) {
+	fmt.Println("wolfcoin starting on port", port)
 
 	r := gin.Default()
 	r.POST("/tx", func(c *gin.Context) {
@@ -20,5 +20,5 @@ func Start() {
 		json.Unmarshal(b, &tx)
 		c.JSON(200, gin.H{"ok": true})
 	})
-	r.Run(":3000")
+	r.Run(":" + port)
 }

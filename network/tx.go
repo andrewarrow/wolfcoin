@@ -30,11 +30,9 @@ func Validate(jsonString, sig string) {
 		fmt.Println("sig is not right")
 		return
 	}
-	//go ahead and allow these tx in, they will be rejected later
-	//if books[tx.From] < tx.Amount {
-	//	fmt.Println("missing", tx.Amount-books[tx.From])
-	//	return
-	//}
+	if books[tx.From] < tx.Amount {
+		//TODO
+	}
 	books[tx.From] -= tx.Amount
 	books[tx.To] += tx.Amount
 
