@@ -4,6 +4,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
+	"os"
+	"wolfcoin/files"
 
 	"github.com/gin-gonic/gin"
 )
@@ -36,8 +38,9 @@ func Start(port string) {
 		b, _ := ioutil.ReadAll(c.Request.Body)
 		c.Request.Body.Close()
 		fmt.Println(string(b))
-		var tx TxMessage
-		json.Unmarshal(b, &tx)
+		f, _ := os.OpenFile(files.Path+"/tx.log", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+		f.WriteString(string(b) + "\n")
+		f.Close()
 		c.JSON(200, gin.H{"ok": true})
 	})
 	r.Run(":" + port)

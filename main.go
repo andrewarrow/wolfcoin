@@ -33,6 +33,7 @@ func main() {
 	}
 	command := os.Args[1]
 	port := argMap["port"]
+	other := argMap["other"]
 	files.ReadyDir(port)
 
 	if command == "genesis" {
@@ -77,7 +78,7 @@ func main() {
 			thing.JsonString = jsonString
 			thing.SigString = sigString
 			asBytes, _ := json.Marshal(thing)
-			network.DoPost("127.0.0.1:3001", "/validate", asBytes)
+			network.DoPost("127.0.0.1:"+other, "/validate", asBytes)
 			time.Sleep(time.Second)
 		}
 	} else if command == "tx" {
