@@ -63,15 +63,7 @@ func main() {
 		node3.Books[r.To] -= r.Amount
 	}
 	fmt.Println(node1, node2, node3)
-	// gossip
-	// i heard ABC gave 100 to EFG - txID 123
-	// i heard ABC gave 100 to XYZ - txID 456
-
-	// LTZ problem!
-
-	// tx123 is ok
-	// tx456 is LTZ rejected
-
-	// broacast 123 OK, 456 BAD
+	node3.AddTx(123, "ABC", "EFG", 100)
+	fmt.Println(node1, node2, node3)
 
 }
