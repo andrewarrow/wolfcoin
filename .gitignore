@@ -2,3 +2,4 @@ wolfcoin
 go.sum
 vendor
 testing/001_simple/001_simple
+testing/002_threaded/002_threaded
