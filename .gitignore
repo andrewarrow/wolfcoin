@@ -1,4 +1,4 @@
 wolfcoin
 go.sum
 vendor
-testing/testing
+testing/001_simple/001_simple
