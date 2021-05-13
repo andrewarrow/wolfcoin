@@ -3,6 +3,7 @@ package main
 import "fmt"
 
 var gossip []Tx = []Tx{}
+var rejects []Tx = []Tx{}
 
 type Node struct {
 	Books map[string]int
@@ -40,13 +41,14 @@ func main() {
 
 	node2.AddTx(123, "ABC", "EFG", 100)
 	fmt.Println(node1, node2, node3)
-	node3.AddTx(123, "ABC", "XYZ", 100)
+	node3.AddTx(124, "ABC", "XYZ", 100)
 	fmt.Println(node1, node2, node3)
 
 	for _, g := range gossip {
 
 		if node1.Books[g.From]-g.Amount < 0 {
 			fmt.Println("reject tx", g.Id)
+			rejects = append(rejects, g)
 			continue
 		}
 
@@ -54,6 +56,12 @@ func main() {
 		node1.Books[g.To] += g.Amount
 	}
 
+	fmt.Println(node1, node2, node3)
+
+	for _, r := range rejects {
+		node3.Books[r.From] += r.Amount
+		node3.Books[r.To] -= r.Amount
+	}
 	fmt.Println(node1, node2, node3)
 	// gossip
 	// i heard ABC gave 100 to EFG - txID 123
