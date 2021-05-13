@@ -11,6 +11,7 @@ type Node struct {
 	Id     int
 	Books  map[string]int
 	Gossip chan Tx
+	Reject chan Tx
 }
 
 type Tx struct {
@@ -26,6 +27,7 @@ func NewNode(id int) Node {
 	node.Books = map[string]int{}
 	node.Books["ABC"] = 100
 	node.Gossip = make(chan Tx, 1024)
+	node.Reject = make(chan Tx, 1024)
 	go node.ListenToGossip()
 	go node.ListenToRejects()
 	return node
@@ -33,13 +35,22 @@ func NewNode(id int) Node {
 
 func (n Node) ListenToGossip() {
 	for g := range n.Gossip {
-		fmt.Println(n.Id, "ListenToGossip", g)
+		fmt.Println(n.Id, "ListenToGossip", g.Id)
+		if n.Books[g.From]-g.Amount < 0 {
+			fmt.Println(n.Id, "!!!", g.Id)
+			for _, other := range nodes {
+				if other.Id == n.Id {
+					continue
+				}
+				other.Reject <- g
+			}
+		}
 		time.Sleep(time.Second)
 	}
 }
 func (n Node) ListenToRejects() {
-	for {
-		fmt.Println(n.Id, "ListenToRejects")
+	for r := range n.Reject {
+		fmt.Println(n.Id, "ListenToRejects", r.Id)
 		time.Sleep(time.Second)
 	}
 }
