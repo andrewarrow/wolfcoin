@@ -33,15 +33,23 @@ func NewNode(id int) Node {
 	return node
 }
 
+func (n Node) Others() []Node {
+	list := []Node{}
+	for _, other := range nodes {
+		if other.Id == n.Id {
+			continue
+		}
+		list = append(list, other)
+	}
+	return list
+}
+
 func (n Node) ListenToGossip() {
 	for g := range n.Gossip {
 		fmt.Println(n.Id, "ListenToGossip", g.Id)
 		if n.Books[g.From]-g.Amount < 0 {
 			fmt.Println(n.Id, "!!!", g.Id)
-			for _, other := range nodes {
-				if other.Id == n.Id {
-					continue
-				}
+			for _, other := range n.Others() {
 				other.Reject <- g
 			}
 		}
@@ -59,10 +67,7 @@ func (n Node) AddTx(id int, from, to string, amount int) {
 	n.Books[from] -= amount
 	n.Books[to] += amount
 	tx := Tx{id, from, to, amount}
-	for _, other := range nodes {
-		if other.Id == n.Id {
-			continue
-		}
+	for _, other := range n.Others() {
 		other.Gossip <- tx
 	}
 }
