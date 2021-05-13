@@ -1,3 +1,4 @@
 wolfcoin
 go.sum
 vendor
+testing/testing
